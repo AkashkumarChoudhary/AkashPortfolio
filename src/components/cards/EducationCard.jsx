@@ -7,13 +7,26 @@ const Top = styled.div`
   display: flex;
   max-width: 100%;
   gap: 12px;
+  align-items: center;
 `;
-const Image = styled.img`
+const LogoCircle = styled.div`
   height: 50px;
-  border-radius: 10px;
-  margin-top: 4px;
+  width: 50px;
+  min-width: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  background: ${({ theme }) => theme.gradient};
   @media only screen and (max-width: 768px) {
     height: 40px;
+    width: 40px;
+    min-width: 40px;
+    font-size: 12px;
   }
 `;
 const Body = styled.div`
@@ -23,25 +36,25 @@ const Body = styled.div`
 `;
 const School = styled.div`
   font-size: 18px;
-  font-weight: 600px;
-  color: ${({ theme }) => theme.text_primary + 99};
+  font-weight: 600;
+  color: ${({ theme }) => theme.text_primary};
   @media only screen and (max-width: 768px) {
     font-size: 14px;
   }
 `;
 const Degree = styled.div`
   font-size: 14px;
-  font-weight: 500px;
-  color: ${({ theme }) => theme.text_secondary + 99};
+  font-weight: 500;
+  color: ${({ theme }) => theme.accent2};
   @media only screen and (max-width: 768px) {
     font-size: 12px;
   }
 `;
 const Date = styled.div`
   font-size: 12px;
-  font-weight: 400px;
-  color: ${({ theme }) => theme.text_secondary + 80};
-
+  font-weight: 400;
+  font-family: "JetBrains Mono", monospace;
+  color: ${({ theme }) => theme.text_secondary};
   @media only screen and (max-width: 768px) {
     font-size: 10px;
   }
@@ -51,7 +64,8 @@ const Description = styled.div`
   width: 100%;
   font-size: 15px;
   font-weight: 400;
-  color: ${({ theme }) => theme.text_primary + 99};
+  line-height: 22px;
+  color: ${({ theme }) => theme.text_secondary};
   margin-bottom: 10px;
   @media only screen and (max-width: 768px) {
     font-size: 12px;
@@ -61,46 +75,53 @@ const Description = styled.div`
 const Grade = styled.div`
   font-size: 14px;
   font-weight: 500;
-  color: ${({ theme }) => theme.text_secondary + 99};
+  color: ${({ theme }) => theme.text_primary};
   @media only screen and (max-width: 768px) {
     font-size: 12px;
   }
-`;
-const Span = styled.div`
-  display: -webkit-box;
-  max-width: 100%;
 `;
 
 const EducationCard = ({ education }) => {
   return (
     <VerticalTimelineElement
       icon={
-        <img
-          width="100%"
-          height="100%"
-          alt={education?.school}
-          style={{ borderRadius: "50%", objectFit: "cover" }}
-          src={education?.img}
-        />
+        <div
+          style={{
+            height: "100%",
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontFamily: "'JetBrains Mono', monospace",
+            fontWeight: 700,
+            fontSize: "13px",
+            color: "#fff",
+          }}
+        >
+          {education?.logoText}
+        </div>
       }
+      iconStyle={{
+        background: "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)",
+        boxShadow: "0 0 0 4px #0d1117, 0 0 20px rgba(124,92,255,0.4)",
+      }}
       contentStyle={{
         display: "flex",
         flexDirection: "column",
         gap: "12px",
-        background: "#1d1836",
+        background: "rgba(13, 17, 23, 0.85)",
         color: "#fff",
-        boxShadow: "rgba(23, 92, 230, 0.15) 0px 4px 24px",
-        backgroundColor: "rgba(17, 25, 40, 0.83)",
-        border: "1px solid rgba(255, 255, 255, 0.125)",
-        borderRadius: "6px",
+        boxShadow: "0 8px 30px rgba(0,0,0,0.4)",
+        border: "1px solid rgba(255, 255, 255, 0.08)",
+        borderRadius: "12px",
       }}
       contentArrowStyle={{
-        borderRight: "7px solid  rgba(255, 255, 255, 0.3)",
+        borderRight: "7px solid rgba(124, 92, 255, 0.4)",
       }}
       date={education?.date}
     >
       <Top>
-        <Image src={education?.img} />
+        <LogoCircle>{education?.logoText}</LogoCircle>
         <Body>
           <School>{education?.school}</School>
           <Degree>{education?.degree}</Degree>
@@ -108,12 +129,10 @@ const EducationCard = ({ education }) => {
         </Body>
       </Top>
       <Grade>
-        <b>Grade : </b>
+        <b>Grade: </b>
         {education?.grade}
       </Grade>
-      <Description>
-        {education?.desc && <Span>{education.desc}</Span>}
-      </Description>
+      {education?.desc && <Description>{education.desc}</Description>}
     </VerticalTimelineElement>
   );
 };

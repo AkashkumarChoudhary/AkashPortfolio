@@ -12,6 +12,7 @@ import {
   headTextAnimation,
 } from "../../utils/motion";
 import StarCanvas from "../canvas/Stars";
+import { GitHub, LinkedIn } from "@mui/icons-material";
 
 const HeroContainer = styled.div`
   display: flex;
@@ -73,11 +74,24 @@ const HeroRightContainer = styled.div`
   }
 `;
 
+const Eyebrow = styled.div`
+  font-family: "JetBrains Mono", monospace;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: ${({ theme }) => theme.accent1};
+  margin-bottom: 14px;
+
+  @media (max-width: 960px) {
+    text-align: center;
+    font-size: 13px;
+  }
+`;
+
 const Title = styled.div`
-  font-weight: 700;
+  font-weight: 800;
   font-size: 50px;
   color: ${({ theme }) => theme.text_primary};
-  line-height: 68px;
+  line-height: 64px;
 
   @media (max-width: 960px) {
     text-align: center;
@@ -88,6 +102,13 @@ const Title = styled.div`
     line-height: 48px;
     margin-bottom: 8px;
   }
+`;
+
+const GradientText = styled.span`
+  background: ${({ theme }) => theme.gradient};
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
 
 const TextLoop = styled.div`
@@ -111,14 +132,15 @@ const TextLoop = styled.div`
 
 const Span = styled.div`
   cursor: pointer;
-  color: ${({ theme }) => theme.primary};
+  font-family: "JetBrains Mono", monospace;
+  color: ${({ theme }) => theme.accent2};
 `;
 
 const SubTitle = styled.div`
-  font-size: 20px;
+  font-size: 19px;
   line-height: 32px;
-  margin-bottom: 42px;
-  color: ${({ theme }) => theme.text_primary + 95};
+  margin-bottom: 28px;
+  color: ${({ theme }) => theme.text_secondary};
 
   @media (max-width: 960px) {
     text-align: center;
@@ -126,55 +148,98 @@ const SubTitle = styled.div`
 
   @media (max-width: 960px) {
     font-size: 16px;
-    line-height: 32px;
+    line-height: 30px;
+  }
+`;
+
+const StatRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 32px;
+
+  @media (max-width: 960px) {
+    justify-content: center;
+  }
+`;
+
+const StatChip = styled.div`
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: ${({ theme }) => theme.text_primary};
+  border: 1px solid rgba(124, 92, 255, 0.4);
+  background: rgba(124, 92, 255, 0.08);
+  border-radius: 8px;
+  padding: 7px 12px;
+`;
+
+const ButtonRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+
+  @media (max-width: 960px) {
+    justify-content: center;
   }
 `;
 
 const ResumeButton = styled.a`
-  -webkit-appearance: button;
-  -moz-appearance: button;
   appearance: button;
   text-decoration: none;
-
-  width: 95%;
-  max-width: 300px;
   text-align: center;
-  padding: 16px 0;
-
-  background: hsla(271, 100%, 50%, 1);
-  background: linear-gradient(
-    225deg,
-    hsla(271, 100%, 50%, 1) 0%,
-    hsla(294, 100%, 50%, 1) 100%
-  );
-  background: -moz-linear-gradient(
-    225deg,
-    hsla(271, 100%, 50%, 1) 0%,
-    hsla(294, 100%, 50%, 1) 100%
-  );
-  background: -webkit-linear-gradient(
-    225deg,
-    hsla(271, 100%, 50%, 1) 0%,
-    hsla(294, 100%, 50%, 1) 100%
-  );
-  box-shadow: 20px 20px 60px #1f2634, -20px -20px 60px #1f2634;
-  border-radius: 50px;
+  padding: 15px 28px;
+  background: ${({ theme }) => theme.gradient};
+  box-shadow: 0 8px 30px rgba(124, 92, 255, 0.35);
+  border-radius: 12px;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 17px;
+  color: white;
+  transition: all 0.3s ease-in-out;
 
-     &:hover {
-        transform: scale(1.05);
-    transition: all 0.4s ease-in-out;
-    box-shadow:  20px 20px 60px #1F2634,
-    filter: brightness(1);
-    }    
-    
-    
-    @media (max-width: 640px) {
-        padding: 12px 0;
-        font-size: 18px;
-    } 
-    color: white;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(124, 92, 255, 0.5);
+  }
+
+  @media (max-width: 640px) {
+    padding: 13px 22px;
+    font-size: 16px;
+  }
+`;
+
+const OutlineButton = styled.a`
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 22px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: ${({ theme }) => theme.text_primary};
+  background: rgba(255, 255, 255, 0.02);
+  font-weight: 500;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    border-color: ${({ theme }) => theme.accent2};
+    color: ${({ theme }) => theme.accent2};
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 640px) {
+    padding: 12px 18px;
+    font-size: 15px;
+  }
+`;
+
+const ImgWrap = styled.div`
+  position: relative;
+  border-radius: 50%;
+  padding: 4px;
+  background: ${({ theme }) => theme.gradient};
+  box-shadow: 0 0 60px rgba(124, 92, 255, 0.35);
 `;
 
 const Img = styled.img`
@@ -183,7 +248,9 @@ const Img = styled.img`
   height: 100%;
   max-width: 400px;
   max-height: 400px;
-  border: 2px solid ${({ theme }) => theme.primary};
+  display: block;
+  object-fit: cover;
+  border: 4px solid ${({ theme }) => theme.bg};
 
   @media (max-width: 640px) {
     max-width: 280px;
@@ -228,8 +295,9 @@ const Hero = () => {
           <HeroInnerContainer>
             <HeroLeftContainer>
               <motion.div {...headTextAnimation}>
+                <Eyebrow>{"// software engineer · genai · distributed systems"}</Eyebrow>
                 <Title>
-                  Hi, I am <br /> {Bio.name}
+                  Hi, I am <br /> <GradientText>{Bio.name}</GradientText>
                 </Title>
                 <TextLoop>
                   I am a
@@ -247,16 +315,31 @@ const Hero = () => {
 
               <motion.div {...headContentAnimation}>
                 <SubTitle>{Bio.description}</SubTitle>
+                <StatRow>
+                  {Bio.stats?.map((stat, i) => (
+                    <StatChip key={`stat-${i}`}>{stat}</StatChip>
+                  ))}
+                </StatRow>
               </motion.div>
 
-              <ResumeButton href={Bio.resume} target="_blank">
-                Check Resume
-              </ResumeButton>
+              <ButtonRow>
+                <ResumeButton href={Bio.resume} target="_blank">
+                  Check Resume
+                </ResumeButton>
+                <OutlineButton href={Bio.github} target="_blank">
+                  <GitHub style={{ fontSize: "18px" }} /> GitHub
+                </OutlineButton>
+                <OutlineButton href={Bio.linkedin} target="_blank">
+                  <LinkedIn style={{ fontSize: "18px" }} /> LinkedIn
+                </OutlineButton>
+              </ButtonRow>
             </HeroLeftContainer>
             <HeroRightContainer>
               <motion.div {...headContentAnimation}>
                 <Tilt>
-                  <Img src={HeroImg} alt="Akash Kumar Choudhary" />
+                  <ImgWrap>
+                    <Img src={HeroImg} alt="Akash Kumar Choudhary" />
+                  </ImgWrap>
                 </Tilt>
               </motion.div>
             </HeroRightContainer>

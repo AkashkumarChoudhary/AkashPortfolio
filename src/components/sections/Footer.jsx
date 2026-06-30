@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Bio } from "../../data/constants";
 import {
-  FacebookRounded,
+  GitHub,
   Instagram,
   LinkedIn,
   Twitter,
@@ -27,9 +27,12 @@ const FooterWrapper = styled.div`
   color: ${({ theme }) => theme.text_primary};
 `;
 const Logo = styled.div`
-  font-weight: 600;
-  font-size: 20px;
-  color: ${({ theme }) => theme.primary};
+  font-weight: 700;
+  font-size: 22px;
+  background: ${({ theme }) => theme.gradient};
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
 const Nav = styled.ul`
   width: 100%;
@@ -93,20 +96,20 @@ const Footer = () => {
           <NavLink href="#Education">Education</NavLink>
         </Nav>
         <SocialMediaIcons>
-          <SocialMediaIcon href={Bio.facebook} target="display">
-            <FacebookRounded />
+          <SocialMediaIcon href={Bio.github} target="_blank">
+            <GitHub />
           </SocialMediaIcon>
-          <SocialMediaIcon href={Bio.twitter} target="display">
-            <Twitter />
-          </SocialMediaIcon>
-          <SocialMediaIcon href={Bio.linkedin} target="display">
+          <SocialMediaIcon href={Bio.linkedin} target="_blank">
             <LinkedIn />
           </SocialMediaIcon>
-          <SocialMediaIcon href={Bio.insta} target="display">
+          <SocialMediaIcon href={Bio.twitter} target="_blank">
+            <Twitter />
+          </SocialMediaIcon>
+          <SocialMediaIcon href={Bio.insta} target="_blank">
             <Instagram />
           </SocialMediaIcon>
         </SocialMediaIcons>
-        <Copyright>&copy; 2025 Akash Kumar Choudhary. All rights reserved.</Copyright>
+        <Copyright>&copy; 2026 Akash Kumar Choudhary. All rights reserved.</Copyright>
       </FooterWrapper>
     </FooterContainer>
   );

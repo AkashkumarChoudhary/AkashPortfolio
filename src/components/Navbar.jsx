@@ -29,10 +29,15 @@ const NavbarContainer = styled.div`
 const NavLogo = styled(LinkR)`
   width: 80%;
   padding: 0 6px;
-  font-weight: 500;
-  font-size: 18px;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 1px;
   text-decoration: none;
-  color: inherit;
+  background: ${({ theme }) => theme.gradient};
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
 
 const NavItems = styled.ul`
@@ -73,21 +78,23 @@ const ButtonContainer = styled.div`
 `;
 
 const GithubButton = styled.a`
-  border: 1px solid ${({ theme }) => theme.primary};
-  color: ${({ theme }) => theme.primary};
+  border: 1px solid rgba(124, 92, 255, 0.5);
+  color: ${({ theme }) => theme.text_primary};
+  background: rgba(124, 92, 255, 0.1);
   justify-content: center;
   display: flex;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 12px;
   cursor: pointer;
   padding: 10px 20px;
   font-size: 16px;
-  font-weight: 500;
-  transition: all 0.6s ease-in-out;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
   text-decoration: none;
   &:hover {
-    background: ${({ theme }) => theme.primary};
-    color: ${({ theme }) => theme.text_primary};
+    background: ${({ theme }) => theme.gradient};
+    border-color: transparent;
+    color: #fff;
   }
 `;
 
