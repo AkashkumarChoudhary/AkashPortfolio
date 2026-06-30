@@ -3,116 +3,208 @@ import styled from "styled-components";
 
 const Card = styled.div`
   width: 330px;
-  height: 490px;
-  background-color: ${({ theme }) => theme.card};
-  cursor: pointer;
-  border-radius: 10px;
-  box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.4);
-  overflow: hidden;
-  padding: 26px 20px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  transition: all 0.5s ease-in-out;
+  background: rgba(13, 17, 23, 0.8);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  padding: 18px;
+  gap: 12px;
+  transition: all 0.4s ease-in-out;
   &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 50px 4px rgba(0, 0, 0, 0.6);
-    filter: brightness(1.1);
+    transform: translateY(-8px);
+    border-color: rgba(124, 92, 255, 0.4);
+    box-shadow: 0 16px 50px rgba(124, 92, 255, 0.22);
   }
 `;
-const Image = styled.img`
+
+const CardArt = styled.div`
   width: 100%;
-  height: 180px;
-  background-color: ${({ theme }) => theme.white};
+  height: 170px;
   border-radius: 10px;
-  box-shadow: 0 0 16px 2px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+  background: linear-gradient(135deg, #1b2236 0%, #0d1117 100%);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at 20% 20%,
+        rgba(59, 130, 246, 0.45) 0%,
+        transparent 45%
+      ),
+      radial-gradient(
+        circle at 85% 80%,
+        rgba(139, 92, 246, 0.45) 0%,
+        transparent 45%
+      );
+  }
 `;
+
+const ArtImage = styled.img`
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 10px;
+`;
+
+const ArtTag = styled.span`
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  padding: 4px 8px;
+  z-index: 1;
+`;
+
+const ArtTitle = styled.div`
+  position: relative;
+  z-index: 1;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+`;
+
 const Tags = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 4px;
+  gap: 6px;
+  margin-top: 2px;
 `;
+
+const Tag = styled.span`
+  font-size: 11px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.accent2};
+  background: rgba(124, 92, 255, 0.12);
+  border: 1px solid rgba(124, 92, 255, 0.25);
+  padding: 3px 8px;
+  border-radius: 6px;
+`;
+
 const Details = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0px;
+  gap: 4px;
   padding: 0px 2px;
 `;
 const Title = styled.div`
   font-size: 20px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.text_secondary};
-  overflow: hidden;
-  display: -webkit-box;
-  max-width: 100%;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-weight: 700;
+  color: ${({ theme }) => theme.text_primary};
 `;
 const Date = styled.div`
   font-size: 12px;
-  margin-left: 2px;
   font-weight: 400;
-  color: ${({ theme }) => theme.text_secondary + 80};
-  @media only screen and (max-width: 768px) {
-    font-size: 10px;
-  }
+  font-family: "JetBrains Mono", monospace;
+  color: ${({ theme }) => theme.text_secondary};
 `;
 const Description = styled.div`
   font-weight: 400;
-  color: ${({ theme }) => theme.text_secondary + 99};
+  font-size: 14px;
+  line-height: 20px;
+  color: ${({ theme }) => theme.text_secondary};
   overflow: hidden;
-  margin-top: 8px;
+  margin-top: 4px;
   display: -webkit-box;
   max-width: 100%;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
 `;
-const Members = styled.div`
+
+const Actions = styled.div`
   display: flex;
-  align-items: center;
-  padding-left: 10px;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 6px;
 `;
-const Avatar = styled.img`
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  margin-left: -10px;
-  background-color: ${({ theme }) => theme.white};
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border: 3px solid ${({ theme }) => theme.card};
-`;
-const Button = styled.a`
-  color: ${({ theme }) => theme.primary};
+const PrimaryLink = styled.a`
+  flex: 1;
+  text-align: center;
   text-decoration: none;
   font-weight: 600;
+  font-size: 14px;
+  padding: 9px 0;
+  border-radius: 10px;
+  background: ${({ theme }) => theme.gradient};
+  color: #fff;
+  transition: all 0.25s ease-in-out;
+  &:hover {
+    filter: brightness(1.1);
+  }
+`;
+const GhostLink = styled.a`
+  flex: 1;
   text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 9px 0;
+  border-radius: 10px;
+  border: 1px solid rgba(124, 92, 255, 0.4);
+  color: ${({ theme }) => theme.text_primary};
+  transition: all 0.25s ease-in-out;
+  &:hover {
+    background: rgba(124, 92, 255, 0.12);
+  }
 `;
 
 const ProjectCard = ({ project }) => {
   return (
     <Card>
-      <Image src={project.image} />
-      <Tags></Tags>
+      {project.image ? (
+        <ArtImage src={project.image} alt={project.title} />
+      ) : (
+        <CardArt>
+          <ArtTag>{project.category === "ai" ? "AI / GenAI" : "Full-Stack"}</ArtTag>
+          <ArtTitle>{project.title}</ArtTitle>
+        </CardArt>
+      )}
+
+      <Tags>
+        {project.tags?.slice(0, 4).map((tag, i) => (
+          <Tag key={`tag-${i}`}>{tag}</Tag>
+        ))}
+      </Tags>
+
       <Details>
         <Title>{project.title}</Title>
         <Date>{project.date}</Date>
         <Description>{project.description}</Description>
       </Details>
-      <Members>
-        {project.member?.map((member) => (
-          <Avatar src={member.img} />
-        ))}
-      </Members>
-      <Button href={project.github} target="_blank">
-        View Code
-      </Button>
+
+      <Actions>
+        <PrimaryLink href={project.github} target="_blank">
+          View Code
+        </PrimaryLink>
+        {project.webapp ? (
+          <GhostLink href={project.webapp} target="_blank">
+            Live Demo
+          </GhostLink>
+        ) : null}
+      </Actions>
     </Card>
   );
 };
